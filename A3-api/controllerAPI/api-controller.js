@@ -156,4 +156,19 @@ router.get("/fundraisers/:id", (req, res) => {
   })
 })
 
+router.post("/donation", (req, res) => {
+  var date = req.body.DATE;
+  var amount = req.body.AMOUNT;
+  var giver = req.body.GIVER;
+  var fundraiserID = req.body.FUNDRAISER_ID;
+  connection.query("INSERT INTO DONATION(DATE, AMOUNT, GIVER, FUNDRAISER_ID) VALUES('" + date + "'," + amount + ",'" + giver + "'," + fundraiserID + ")",
+    (err, result) => {
+      if (err) {
+        console.error("Error while retrieve the data" + err);
+      } else {
+        res.send({ insert: "success" });
+      }
+    })
+})
+
 module.exports = router;
