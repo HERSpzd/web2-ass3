@@ -171,4 +171,23 @@ router.post("/donation", (req, res) => {
     })
 })
 
+router.post("/insert_fundraiser", (req, res) => {
+  var organizer = req.body.ORGANIZER;
+  var caption = req.body.CAPTION;
+  var targetFunding = req.body.TARGET_FUNDING;
+  var currentFunding = req.body.CURRENT_FUNDING;
+  var city = req.body.CITY;
+  var active = req.body.ACTIVE;
+  var categoryID = req.body.CATEGORY_ID;
+  connection.query("INSERT INTO FUNDRAISER(ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES " +
+    "('" + organizer + "','" + caption + "'," + targetFunding + "," + currentFunding + ",'" + city + "'," + active + "," + categoryID + ")",
+    (err, result) => {
+      if (err) {
+        console.error("Error while retrieve the data" + err);
+      } else {
+        res.send({ insert: "success" });
+      }
+    })
+})
+
 module.exports = router;
