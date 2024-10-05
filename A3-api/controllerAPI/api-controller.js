@@ -133,6 +133,8 @@ router.get("/search", (req, res) => {
 
 /**
  * 
+ * Updated get method
+ * 
  * Get the details of a fundraiser (by ID) 
  * from the database
  * 
@@ -140,18 +142,18 @@ router.get("/search", (req, res) => {
  * 
  */
 router.get("/fundraisers/:id", (req, res) => {
-  connection.query("SELECT f.*, c.NAME AS CATEGORY_NAME " + 
-                   "FROM FUNDRAISER f " + 
-                   "JOIN CATEGORY c ON f.CATEGORY_ID = c.CATEGORY_ID " + 
-                   "WHERE f.ACTIVE = true " + 
-                   "AND FUNDRAISER_ID = " + req.params.id,
-  (err, records, fields) => {
-      if (err) {
-        console.error("Error while retrieve the data");
-      } else {
-        res.send(records);
-      }
-    })
+  connection.query(`SELECT f.*, c.NAME AS CATEGORY_NAME, d.*
+    FROM FUNDRAISER f
+    JOIN CATEGORY c ON f.CATEGORY_ID = c.CATEGORY_ID
+    LEFT JOIN DONATION d ON f.FUNDRAISER_ID = d.FUNDRAISER_ID
+    WHERE f.ACTIVE = true
+    AND f.FUNDRAISER_ID = `  + req.params.id, (err, records, fields) => {
+    if (err) {
+      console.error("Error while retrieve the data");
+    } else {
+      res.send(records);
+    }
+  })
 })
 
 module.exports = router;
