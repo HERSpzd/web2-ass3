@@ -142,7 +142,7 @@ router.get("/search", (req, res) => {
  * 
  */
 router.get("/fundraisers/:id", (req, res) => {
-  connection.query(`SELECT f.*, c.NAME AS CATEGORY_NAME, d.*
+  connection.query(`SELECT f.*, c.NAME AS CATEGORY_NAME, d.DONATION_ID, d.DATE, d.AMOUNT, d.GIVER
     FROM FUNDRAISER f
     JOIN CATEGORY c ON f.CATEGORY_ID = c.CATEGORY_ID
     LEFT JOIN DONATION d ON f.FUNDRAISER_ID = d.FUNDRAISER_ID
@@ -155,6 +155,7 @@ router.get("/fundraisers/:id", (req, res) => {
     }
   })
 })
+
 
 router.post("/donation", (req, res) => {
   var date = req.body.DATE;
