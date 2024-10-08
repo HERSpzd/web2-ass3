@@ -191,4 +191,59 @@ router.post("/insert_fundraiser", (req, res) => {
     })
 })
 
+router.put("/update_fundraiser/:id", (req, res) => {
+  // var fundraiserID = req.body.FUNDRAISER_ID;
+  var organizer = req.body.ORGANIZER;
+  var caption = req.body.CAPTION;
+  var targetFunding = req.body.TARGET_FUNDING;
+  var currentFunding = req.body.CURRENT_FUNDING;
+  var city = req.body.CITY;
+  var active = req.body.ACTIVE;
+  var categoryID = req.body.CATEGORY_ID;
+  connection.query("UPDATE FUNDRAISER SET ORGANIZER = '" + organizer + "', " +
+    "CAPTION = '" + caption + "', " +
+    "TARGET_FUNDING = " + targetFunding + ", " +
+    "CURRENT_FUNDING = " + currentFunding + ", " +
+    "CITY = '" + city + "', " +
+    "ACTIVE = '" + active + "', " +
+    "CATEGORY_ID = " + categoryID + " " +
+    "WHERE FUNDRAISER_ID = " + req.params.id
+    , (err, result) => {
+      if (err) {
+        console.error("Error while Updating the data" + err);
+      } else {
+        res.send({ update: "success" });
+      }
+    })
+})
+
+router.delete("/delete_fundraiser/:id", (req, res) => {
+
+
+  connection.query(`SELECT f.FUNDRAISER_ID, d.AMOUNT
+    FROM FUNDRAISER f
+    JOIN DONATION d ON f.FUNDRAISER_ID = d.FUNDRAISER_ID
+    WHERE f.ACTIVE = true
+    AND f.FUNDRAISER_ID = `  + req.params.id, (err, records, fields) => {
+    if (err) {
+      console.error("Error while deleting the data");
+    } 
+
+    if (records.length === 0) {
+      connection.query("DELETE from FUNDRAISER where FUNDRAISER_ID = " + req.params.id, (err, records, fields) => {
+        if (err) {
+          console.error("Error while deleting the data");
+        } else {
+          res.send({ delete: "Delete Sucess" });
+        }
+      })
+    } else {
+      res.send({ delete: "Can not delete this fundraiser" });
+      console.error("Can not delete this fundraiser");
+    }
+
+  })
+
+})
+
 module.exports = router;
