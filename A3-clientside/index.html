@@ -132,7 +132,8 @@
     <ul id="nav">
         <li><a href="/"><span>Home</span></a></li>
         <li><a href="/search_fundraisers"><span>Search Fundraisers</span></a></li>
-        <li><a href="fundraisers"><span>Fundraisers</span></a></li>
+        <li><a href="/fundraisers"><span>Fundraisers</span></a></li>
+        <li><a href="/donation"><span>Donation</span></a></li>
     </ul>
 
     <!-- Welcome message -->
@@ -224,7 +225,11 @@
                 data.forEach(crowedfunding => {
                     // Create img element to display images on the page
                     const newImg = document.createElement("img");
-                    newImg.src = `image/image${crowedfunding.FUNDRAISER_ID}.png`;
+                    if (crowedfunding.FUNDRAISER_ID <= 5) {
+                        newImg.src = `image/image${crowedfunding.FUNDRAISER_ID}.png`;
+                    } else {
+                        newImg.src = `image/image.png`;
+                    }
 
                     // Create a div element to display all active fundraisers
                     const newDiv1 = document.createElement("div");
