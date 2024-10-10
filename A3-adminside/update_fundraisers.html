@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Fundraisers</title>
+
+    <style>
+        /* Set the style of the entire page */
+        body {
+            background-color: #eef3f8;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* Set the style of h1 */
+        h1 {
+            text-align: center;
+        }
+
+        /* Set the style of the navigation bar */
+        #nav {
+            text-align: center;
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            background-color: rgb(50, 142, 203);
+            width: 80%;
+        }
+
+        #nav li {
+            display: inline-block;
+        }
+
+        #nav li a {
+            display: block;
+            padding: 10px 20px;
+            color: #ffffff;
+            /* Clear underline */
+            text-decoration: none;
+        }
+
+        /* Mouse over to change color */
+        #nav li a:hover {
+            background-color: #0069d9;
+        }
+
+        /* Set box1 container style */
+        #box1 {
+            width: 80%;
+            margin: 0 auto;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        /* Set box container style */
+        #box {
+            width: 30%;
+            float: right;
+        }
+
+        /* 'operation-guide' Container Style */
+        #operation-guide {
+            background-color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-top: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+        }
+
+        /* Set 'criteria' Container Style */
+        #criteria {
+            width: 70%;
+            float: left;
+        }
+
+        /* Set the dividing line for each subheading */
+        #subtitle,
+        #search-result1 {
+            width: 98%;
+            border-bottom: 1.5px solid #0056b3;
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-bottom: 0.5px;
+        }
+
+        /* Set the style of the form */
+        form {
+            margin-left: auto;
+            margin-right: auto;
+            width: 45%;
+        }
+
+        /* Set the style of the dropdown boxes */
+        select {
+            width: 30%;
+            height: 30px;
+            background-color: #eef3f8;
+        }
+
+        /* Set the style of the two buttons */
+        #search1,
+        #clear {
+            width: 20%;
+            height: 30px;
+        }
+
+        /* Set the style of the input boxes */
+        #search-text1,
+        #search-text2,
+        #search-text3 {
+            width: 60%;
+            height: 30px;
+        }
+
+        /* <span style="color: red; "><strong> */
+
+        #error-message {
+            color: red;
+            font-weight: bold;
+        }
+
+
+        /* Set the style of the footer */
+        footer {
+            text-align: center;
+            clear: both;
+            padding: 3px;
+            background-color: rgb(50, 142, 203);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main title -->
+    <h1>Crowdfunding Platform</h1>
+
+    <!-- Navigation -->
+    <ul id="nav">
+        <li><a href="/"><span>Home</span></a></li>
+        <li><a href="/search_fundraisers"><span>Search Fundraisers</span></a></li>
+        <li><a href="/fundraisers"><span>Fundraisers</span></a></li>
+        <li><a href="/donation"><span>Donation</span></a></li>
+    </ul>
+
+    <div id="box1">
+        <div>
+
+            <!-- A simple form to display criteria for searching (organizer, city & category) -->
+            <div id="criteria">
+                <h3 id="subtitle">The criteria for searching</h3>
+
+                <form>
+                    <p>Criteria 1:</p>
+                    <select id="select1">
+                        <option value="SELECT">SELECT...</option>
+                        <option value="ORGANIZER">Organizer</option>
+                        <option value="CITY">City</option>
+                        <option value="CATEGORY_NAME">Category</option>
+                    </select>
+                    <input type="text" id="search-text1" placeholder="Please input some text">
+
+                    <p>Criteria 2 (opional):</p>
+                    <select id="select2">
+                        <option value="NONE">NONE</option>
+                        <option value="CITY">City</option>
+                        <option value="CATEGORY_NAME">Category</option>
+                    </select>
+                    <input type="text" id="search-text2" placeholder="Please input some text">
+
+                    <p>Criteria 3 (opional):</p>
+                    <select id="select3">
+                        <option value="NONE">NONE</option>
+                        <option value="CATEGORY_NAME">Category</option>
+                    </select>
+                    <input type="text" id="search-text3" placeholder="Please input some text">
+
+                    <br><br>
+                    <input type="button" value="Search" id="search1" onclick="search()">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="button" value="Clear" id="clear" onclick="clearChechboxes()">
+                </form>
+
+
+                <!-- Display search results -->
+                <div>
+                    <h3 id="search-result1">Search result</h3>
+                    <div id="search-result"></div>
+                </div>
+
+                <div id="data"></div>
+                <!-- Display error message -->
+                <div id="error-message"></div>
+            </div>
+        </div>
+
+        <div id="box">
+            <!-- Operation guide of this page -->
+            <div id="operation-guide">
+                <h3 id="subtitle">The guide of this page</h3>
+                <p>Select at least one and at most three search categories on the left side of this page. When selecting
+                    a
+                    category, only choose one of the three categories at "Criteria 1". When selecting two categories,
+                    choose
+                    between "Criteria 1" and "Criteria 2". When selecting three categories, choose from "Criteria 1",
+                    "Criteria 2", and "Criteria 3". Then enter text in the corresponding search box and press "Search"
+                    to
+                    search. The search results will be displayed in the "Search result" section. To find more
+                    information
+                    about the corresponding Fundraiser, click on the "More detail" hyperlink, and the webpage will
+                    automatically redirect and display more relevant information. Press "Clear" button to Clear the
+                    Input boxes and dropdown boxes.</p>
+
+                <br>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+        <!-- contact info -->
+        <div id="contact-info">
+            <h3>Contact infomation</h3>
+            <p>Email: crowdfunding@gmail.com</p>
+            <p>Telephone: 0772-1234567890</p>
+            <!-- Purpose of Public Welfare Organization -->
+            <h5>Your support is the seed of hope!</h5>
+        </div>
+    </footer>
+
+</body>
+
+<script>
+    /**
+     * 
+     * alertUsers function
+     * 
+     * Display warning pop-up window:
+     * Users must select at least one search critera
+     * 
+     */
+    function alertUsers() {
+        alert("Please choose one criteria!");
+    }
+
+    /**
+     * 
+     * search function
+     * 
+     * Build a URL based on the search criteria selected 
+     * by the user, send the request to the server side, 
+     * and process the response
+     * 
+     */
+    function search() {
+        // Define a String type with an empty serverURL
+        var serverURL = "";
+        // Get the first value input by the user
+        var searchText1 = document.getElementById("search-text1").value;
+        // Get the first search cateria selected by the user
+        var select1 = document.getElementById("select1").value;
+
+        // Get the second value input by the user
+        var searchText2 = document.getElementById("search-text2").value;
+        // Get the second search cateria selected by the user
+        var select2 = document.getElementById("select2").value;
+
+        // Get the third value input by the user
+        var searchText3 = document.getElementById("search-text3").value;
+        // Get the third search cateria selected by the user
+        var select3 = document.getElementById("select3").value;
+
+        // Users only select one cateria
+        if (select2 === "NONE" && select3 === "NONE") {
+            serverURL = `http://localhost:3060/api/crowdfunding/search?${select1}=${searchText1}`;
+            // Users select two cateria
+        } else if (select3 === "NONE") {
+            serverURL = `http://localhost:3060/api/crowdfunding/search?${select1}=${searchText1}&${select2}=${searchText2}`;
+            // Users select three cateria
+        } else {
+            serverURL = `http://localhost:3060/api/crowdfunding/search?${select1}=${searchText1}&${select2}=${searchText2}&${select3}=${searchText3}`;
+        }
+
+        // For debugging purpose
+        console.log(serverURL);
+
+        // Send request URL and respond
+        fetch(serverURL)
+            .then(response => response.json())
+            .then(data => {
+
+                const dataDiv = document.getElementById('search-result');
+                const errorMessage = document.getElementById('error-message');
+                dataDiv.innerHTML = "";
+                document.getElementById('error-message').innerHTML = "";
+
+                if (data.length > 0) {
+                    data.forEach(crowedfunding => {
+                        const newP = document.createElement("p");
+                        // Display the search results, include More details hyperlink.
+                        // Once click the hyperlink, it will redirect to the selected fundraiser’s detail page
+                        newP.innerHTML = `ID: ${crowedfunding.FUNDRAISER_ID}, Organizer: ${crowedfunding.ORGANIZER}, 
+                        <a href="/fundraisers?FUNDRAISER_ID=${crowedfunding.FUNDRAISER_ID}" onclick="saveId(${crowedfunding.FUNDRAISER_ID})">More details</a>`;
+
+                        // Search results are placed in dataDiv
+                        dataDiv.appendChild(newP);
+                    });
+
+                    // If the user does not select a search category, a question type pop-up window will pop up
+                } else if (document.getElementById("select1").value === "SELECT") {
+                    alertUsers();
+                    // If the corresponding fundraisers are not found, a bold red error message will be displayed
+                } else {
+                    errorMessage.innerHTML = `No fundraiser data`;
+                }
+            })
+            .catch(error => {
+                console.error("Error fecthing data", error);
+                document.getElementById('error-message').textContent = "Failed to load data";
+            });
+
+
+
+    }
+
+    /**
+     * 
+     * clearChechboxes function
+     * 
+     * Clear the search form
+     * Users clict the clear button
+     * to clear the search form
+     * 
+     */
+    function clearChechboxes() {
+        document.getElementById("select1").value = "SELECT";
+        document.getElementById("select2").value = "NONE";
+        document.getElementById("select3").value = "NONE";
+        document.getElementById("search-text1").value = "";
+        document.getElementById("search-text2").value = "";
+        document.getElementById("search-text3").value = "";
+        document.getElementById('search-result').innerHTML = "";
+    }
+
+    /**
+     * 
+     * saveId function
+     * 
+     * Use sessionStorage in the client's browser to save
+     * the ID of the organizer retrieved from the search. 
+     * This ID will be used on the Fundraisers page
+     * 
+     * @param id
+     * 
+     */
+    function saveId(id) {
+        var saveId = id;
+        if (typeof (Storage) !== 'undefined') {
+            sessionStorage.setItem('id', saveId);
+        }
+    }
+
+</script>
+
+</html>

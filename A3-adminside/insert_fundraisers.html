@@ -1,0 +1,340 @@
+<!-- Updated Fundraisers page -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraisers</title>
+    <style>
+        /* Set the style of the entire page */
+        body {
+            background-color: #eef3f8;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* Set the style of h1 */
+        h1 {
+            text-align: center;
+        }
+
+        /* Set the style of the navigation bar */
+        #nav {
+            text-align: center;
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            background-color: rgb(50, 142, 203);
+            width: 80%;
+        }
+
+        #nav li {
+            display: inline-block;
+        }
+
+        #nav li a {
+            display: block;
+            padding: 10px 20px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* Mouse over to change color */
+        #nav li a:hover {
+            background-color: #0069d9;
+        }
+
+        /* Set box1 container style */
+        #box1 {
+            width: 80%;
+            margin: 0 auto;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        /* Set 'fundraisers-details1' Container Style */
+        #fundraisers-details1 {
+            width: 70%;
+            float: left;
+        }
+
+        /* Set box container style */
+        #box {
+            width: 30%;
+            float: right;
+        }
+
+        /* Set 'operation-guide' Container Style */
+        #operation-guide {
+            background-color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-top: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+        }
+
+        /* Set the dividing line for each subheading */
+        #subtitle,
+        #line {
+            width: 98%;
+            border-bottom: 1.5px solid #0056b3;
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-bottom: 0.5px;
+        }
+
+        /* Set 'fundraisers-details1' Container Style */
+        #fundraisers-details1 {
+            margin-bottom: 20%;
+        }
+
+        /* Set the style of details of fundraisers  */
+        #content {
+            float: right;
+            margin-top: 4%;
+            margin-left: 0;
+            margin-right: 20px;
+            width: 40%;
+            padding-right: 10px;
+        }
+
+        /* Set image style */
+        #fundraisers-details img {
+            float: left;
+            width: 40%;
+            height: auto;
+            margin-left: 10%;
+            margin-top: 3%;
+        }
+
+        /* Set the style of the button */
+        #donate {
+            width: 20%;
+            height: 30px;
+
+        }
+
+
+        /* Set the style of the footer */
+        footer {
+            text-align: center;
+            clear: both;
+            padding: 3px;
+            background-color: rgb(50, 142, 203);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main title -->
+    <h1>Crowdfunding Platform</h1>
+
+    <!-- Navigation -->
+    <ul id="nav">
+        <li><a href="/"><span>Home</span></a></li>
+        <li><a href="/search_fundraisers"><span>Search Fundraisers</span></a></li>
+        <li><a href="/fundraisers"><span>Fundraisers</span></a></li>
+        <li><a href="/donation"><span>Donation</span></a></li>
+    </ul>
+
+
+    <div id="box1">
+        <!-- Fundraisers details -->
+        <div id="fundraisers-details1">
+            <h3 id="subtitle">Fundraisers details</h3>
+
+            <div id="fundraisers-details"></div>
+
+            <div id="data"></div>
+
+            <h3 id="subtitle">Donation details</h3>
+
+            <div id="donation"></div>
+
+            <div id="data"></div>
+
+        </div>
+
+        <!-- Operation guide of this page -->
+        <div id="box">
+            <div id="operation-guide">
+                <h3 id="subtitle">The guide of this page</h3>
+                <p>This page displays more information about fundraisers. Then you can click on "Donate" to make a
+                    donation. The donation function is temporarily unavailable. Thank you for your understanding!</p>
+
+                <br>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+        <!-- contact info -->
+        <div id="contact-info">
+            <h3>Contact infomation</h3>
+            <p>Email: crowdfunding@gmail.com</p>
+            <p>Telephone: 0772-1234567890</p>
+            <!-- Purpose of Public Welfare Organization -->
+            <h5>Your support is the seed of hope!</h5>
+        </div>
+    </footer>
+
+    <script>
+        // Retrieve the ID value obtained from the browser
+        var id = sessionStorage.getItem('id');
+
+        // For debugging purpose
+        console.log(id);
+        console.log(`http://localhost:3060/api/crowdfunding/fundraisers/${id}`);
+
+        /**
+         * 
+         * Retrieve data from the server and display 
+         * detailed information of the searched fundraiser
+         * 
+         */
+        fetch(`http://localhost:3060/api/crowdfunding/fundraisers/${id}`)
+            .then(response => response.json())
+            .then(data => {
+
+                // Get the div with ID 'fundraisers-details'
+                const dataDiv = document.getElementById('fundraisers-details');
+                dataDiv.innerHTML = "";
+
+                if (data.length > 0) {
+                    var crowedfunding = data[0];
+                    // Create img element to display images on the page
+                    const newImg = document.createElement("img");
+                    if (crowedfunding.FUNDRAISER_ID <= 5) {
+                        newImg.src = `image/image${crowedfunding.FUNDRAISER_ID}.png`;
+                    } else {
+                        newImg.src = `image/image.png`;
+                    }
+
+                    console.log(crowedfunding.FUNDRAISER_ID)
+                    // Create a div element to display the searched fundraisers
+                    const newDiv1 = document.createElement("div");
+                    // Name its ID as 'content'
+                    newDiv1.id = "content";
+                    // Display some details of searched fundraisers
+                    newDiv1.innerHTML = `<strong>Organizer: ${crowedfunding.ORGANIZER}</strong> <br> 
+                                            ID: ${crowedfunding.FUNDRAISER_ID} <br> 
+                                            Caption: ${crowedfunding.CAPTION} <br> 
+                                            Target funding: ${crowedfunding.TARGET_FUNDING} AUD<br> 
+                                            Current funding: ${crowedfunding.CURRENT_FUNDING} AUD<br> 
+                                            City: ${crowedfunding.CITY} <br> 
+                                            Active: ${changeToActiveOrInactive(crowedfunding.ACTIVE)} <br> 
+                                            Category: ${crowedfunding.CATEGORY_NAME} <br><br>
+                                            <button id="donate" onclick="document.location='/donation'" onclick="donateAlert();">Donate</button>`;
+
+
+
+                    // Add two elements to the page
+                    dataDiv.appendChild(newImg);
+                    dataDiv.appendChild(newDiv1);
+                    // dataDiv.appendChild(newButton);
+
+                    const dataDiv2 = document.getElementById('donation');
+                    dataDiv2.innerHTML = "";
+                    if (crowedfunding.GIVER === null) {
+                        return;
+                    }
+
+                    data.forEach(crowedfunding => {
+
+                        // Create a div element to display the searched fundraisers
+                        const newDiv2 = document.createElement("div");
+                        // Name its ID as 'content1'
+                        newDiv2.id = "content1";
+                        // Display some details of searched fundraisers
+                        newDiv2.innerHTML = `<strong>Giver: ${crowedfunding.GIVER}</strong> <br> 
+                                            ID: ${crowedfunding.DONATION_ID} <br> 
+                                            Amount: ${crowedfunding.AMOUNT} AUD<br> 
+                                            Date: ${crowedfunding.DATE} <br> `;
+
+
+
+
+                        const newDiv3 = document.createElement("div");
+                        newDiv3.id = "line";
+
+
+                        // Add to the page
+                        dataDiv2.appendChild(newDiv2);
+                        dataDiv2.appendChild(newDiv3);
+                    });
+
+
+                }
+                // If no corresponding data is found, an error message will be displayed
+                else {
+                    dataDiv.textContent = "No donation data";
+                }
+            })
+            .catch(error => {
+                console.error("Error fecthing data", error);
+                document.getElementById('data').textContent = "Failed to load data";
+            });
+
+        /**
+         * 
+         * Updated Function donateAlert
+         * 
+         * Once the donate button is clicked, it will 
+         * show a dialog window saying 
+         * "This feature is under contruction".
+         * 
+         */
+        function donateAlert() {
+            // alert("This feature is under contruction");
+            // location.href = "/donation";
+            var saveId = id;
+            if (typeof (Storage) !== 'undefined') {
+                sessionStorage.setItem('id', saveId);
+            }
+        }
+
+        /**
+         * 
+         * Function removeSessionStorage
+         * 
+         * Once the donate button is clicked,
+         * the browser will delete the stored ID value
+         * 
+         */
+        function removeSessionStorage() {
+            sessionStorage.removeItem('id');
+        }
+
+
+        /**
+         * 
+         * Function changeToActiveOrInactive
+         * 
+         * Change 1 to "Active" and also change
+         * 2 to "Inactive"
+         * 
+         * @param active
+         * 
+         */
+        function changeToActiveOrInactive(active) {
+            if (active === 1) {
+                return "Active";
+            } else {
+                return "Inactive";
+            }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
