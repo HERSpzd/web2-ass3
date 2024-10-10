@@ -1,10 +1,11 @@
+<!-- Updated Fundraisers page -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Donation</title>
     <style>
         /* Set the style of the entire page */
         body {
@@ -15,12 +16,6 @@
         /* Set the style of h1 */
         h1 {
             text-align: center;
-        }
-
-        /* Set the style of welcome message */
-        #title {
-            text-align: center;
-
         }
 
         /* Set the style of the navigation bar */
@@ -40,10 +35,8 @@
         #nav li a {
             display: block;
             padding: 10px 20px;
-            color: white;
-            /* Clear underline */
+            color: #ffffff;
             text-decoration: none;
-
         }
 
         /* Mouse over to change color */
@@ -51,38 +44,35 @@
             background-color: #0069d9;
         }
 
-        /* Set a background box for 'about us' and 'inspiring stories' */
-        #about-us,
-        #inspiring-stories {
-            background-color: white;
-            padding-left: 20px;
-            padding-right: 20px;
-            padding-bottom: 20px;
-            padding-top: 5px;
-            /* Set Shadow */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-
-        }
-
         /* Set box1 container style */
         #box1 {
             width: 80%;
             margin: 0 auto;
             padding: 0;
+            margin-top: 15px;
+        }
+
+        /* Set 'fundraisers-details1' Container Style */
+        #fundraisers-details1 {
+            width: 70%;
+            float: left;
         }
 
         /* Set box container style */
         #box {
             width: 30%;
-            /* Right floating */
             float: right;
         }
 
-        /* Set 'active-fundraisers' Container Style */
-        #active-fundraisers {
-            width: 70%;
-            /* Left floating */
-            float: left;
+        /* Set 'operation-guide' Container Style */
+        #operation-guide {
+            background-color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-top: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
         }
 
         /* Set the dividing line for each subheading */
@@ -90,28 +80,42 @@
         #line {
             width: 98%;
             border-bottom: 1.5px solid #0056b3;
-            padding-bottom: 2%;
+            padding-bottom: 10px;
             display: inline-block;
-            margin-bottom: 1%;
+            margin-bottom: 0.5px;
+        }
+
+        /* Set 'fundraisers-details1' Container Style */
+        #fundraisers-details1 {
+            margin-bottom: 20%;
         }
 
         /* Set the style of details of fundraisers  */
         #content {
             float: right;
-            margin-top: 2%;
+            margin-top: 4%;
             margin-left: 0;
-            width: 50%;
-
+            margin-right: 20px;
+            width: 40%;
+            padding-right: 10px;
         }
 
         /* Set image style */
-        #all-fundraisers img {
+        #fundraisers-details img {
             float: left;
-            width: 30%;
+            width: 40%;
             height: auto;
-            margin-left: 15%;
+            margin-left: 10%;
             margin-top: 3%;
         }
+
+        /* Set the style of the button */
+        #donate {
+            width: 20%;
+            height: 30px;
+
+        }
+
 
         /* Set the style of the footer */
         footer {
@@ -132,61 +136,51 @@
     <ul id="nav">
         <li><a href="/"><span>Home</span></a></li>
         <li><a href="/search_fundraisers"><span>Search Fundraisers</span></a></li>
-        <li><a href="fundraisers"><span>Fundraisers</span></a></li>
+        <li><a href="/fundraisers"><span>Fundraisers</span></a></li>
+        <li><a href="/donation"><span>Donation</span></a></li>
     </ul>
 
-    <!-- Welcome message -->
-    <div id="title">
-        <h2>Wlcome to leading crowdfunding platform!</h2>
 
-    </div>
     <div id="box1">
-        <!-- Active fundraisers -->
-        <div id="active-fundraisers">
-            <h3 id="subtitle">All of the active fundraisers</h3>
-            <div id="all-fundraisers"></div>
+        <!-- Fundraisers details -->
+        <div id="fundraisers-details1">
+            <h3 id="subtitle">Fundraisers details</h3>
 
+            <div id="fundraisers-details"></div>
 
             <div id="data"></div>
+
+            <h3 id="subtitle">Donation details</h3>
+
+            <form id="form1" onsubmit="insertDonation(); return(false);">
+                <br>Giver:<br>
+                <input type="text" id="giver" placeholder="Input Your Name" required><br><br>
+                Amount:<br>
+                <input type="text" id="amount" placeholder="Input Amount (AUD)" required><br><br>
+                Date:<br>
+                <input type="date" id="date" required><br><br>
+                <input type="submit" onclick="insertDonation()" value="Submit my donation" id="donate">
+            </form>
+            <div id="data1"></div>
+
+            <div id="donation"></div>
+
+            <div id="data"></div>
+
         </div>
 
+        <!-- Operation guide of this page -->
         <div id="box">
-            <div id="about-us">
-                <!-- About us section -->
-                <h3 id="subtitle">About us</h3>
-                <p>We are a non-profit organization dedicated to helping individuals and groups in need. This is our
-                    crowdfunding platform, through which you can easily contribute your efforts to worthy causes.
-                    Our platform is committed to transparency, efficiency, and directness. Every fundraising project
-                    undergoes
-                    strict review to ensure that your donations directly reach those who need them the most. You can
-                    easily
-                    browse various fundraising projects and choose the ones to support based on your interests and
-                    values.
-                    From
-                    medical assistance to educational support, from crisis relief to social innovation, there are
-                    various
-                    projects here that require your assistance.</p>
-            </div>
-            <br>
+            <div id="operation-guide">
+                <h3 id="subtitle">The guide of this page</h3>
+                <p>This page displays more information about fundraisers. Then you can click on "Donate" to make a
+                    donation. The donation function is temporarily unavailable. Thank you for your understanding!</p>
 
-            <!-- Two Inspiring stories here -->
-            <div id="inspiring-stories">
-                <h3 id="subtitle">Inspiring stories</h3>
-                <h4>Story 1</h4>
-                <p>A team of young farmers with a dream to build an innovative farm-one that is to be based on renewable
-                    energy
-                    and sustainable agriculture. Huge support was given to this idea on our platform. Today, this farm
-                    provides
-                    not only organic food for the local community but also an educational center of sustainable
-                    agriculture,
-                    with many visitors and learners from all over the country coming to visit.</p>
-                <h4>Story 2</h4>
-                <p>A young team of marine biologists, passionate in the study of the ocean, have long been on the dream
-                    of setting up a marine protected area and a research center. The aim is not just protection but also
-                    the education of the masses on the essence of ocean conservation. This ambitious project has
-                    gathered serious interest on our crowdfunding platform.</p>
+                <br>
+
             </div>
         </div>
+
 
     </div>
 
@@ -202,70 +196,70 @@
         </div>
     </footer>
 
-</body>
+    <script>
+        // Retrieve the ID value obtained from the browser
+        var id = sessionStorage.getItem('id');
+        var data1;
 
-<script>
-    /**
-     * 
-     * Retrieve data from the server and display 
-     * all active fundraisers on the page
-     * 
-     * 
-     */
-    fetch("http://localhost:3060/api/crowdfunding/fundraisers")  //Send request URL and respond
-        .then(response => response.json())
-        .then(data => {
+        // For debugging purpose
+        console.log(id);
+        console.log(`http://localhost:3060/api/crowdfunding/fundraisers/${id}`);
 
-            // Get the div with ID 'all-fundraisers'
-            const dataDiv = document.getElementById('all-fundraisers');
-            dataDiv.innerHTML = "";
+        /**
+         * 
+         * Retrieve data from the server and display 
+         * detailed information of the searched fundraiser
+         * 
+         */
+        fetch(`http://localhost:3060/api/crowdfunding/fundraisers/${id}`)
+            .then(response => response.json())
+            .then(data => {
 
-            if (data.length > 0) {
-                data.forEach(crowedfunding => {
+                data1 = data;
+                // Get the div with ID 'fundraisers-details'
+                const dataDiv = document.getElementById('fundraisers-details');
+                dataDiv.innerHTML = "";
+
+                if (data.length > 0) {
+                    var crowedfunding = data[0];
                     // Create img element to display images on the page
                     const newImg = document.createElement("img");
                     newImg.src = `image/image${crowedfunding.FUNDRAISER_ID}.png`;
 
-                    // Create a div element to display all active fundraisers
+                    // Create a div element to display the searched fundraisers
                     const newDiv1 = document.createElement("div");
                     // Name its ID as 'content'
                     newDiv1.id = "content";
-                    // Display some details of active fundraisers
+                    // Display some details of searched fundraisers
                     newDiv1.innerHTML = `<strong>Organizer: ${crowedfunding.ORGANIZER}</strong> <br> 
-                                        ID: ${crowedfunding.FUNDRAISER_ID} <br> 
-                                        Caption: ${crowedfunding.CAPTION} <br> 
-                                        Target funding: ${crowedfunding.TARGET_FUNDING} AUD<br> 
-                                        Current funding: ${crowedfunding.CURRENT_FUNDING} AUD<br> 
-                                        City: ${crowedfunding.CITY} <br> 
-                                        Active: ${changeToActiveOrInactive(crowedfunding.ACTIVE)} <br> 
-                                        Category: ${crowedfunding.CATEGORY_NAME} <br>`;
+                                            ID: ${crowedfunding.FUNDRAISER_ID} <br> 
+                                            Caption: ${crowedfunding.CAPTION} <br> 
+                                            Target funding: ${crowedfunding.TARGET_FUNDING} AUD<br> 
+                                            Current funding: ${crowedfunding.CURRENT_FUNDING} AUD<br> 
+                                            City: ${crowedfunding.CITY} <br> 
+                                            Active: ${changeToActiveOrInactive(crowedfunding.ACTIVE)} <br> 
+                                            Category: ${crowedfunding.CATEGORY_NAME} <br><br>
+                                            `;
 
-                    // Display a blue line under the fundraisers
-                    const newDiv = document.createElement("div");
-                    newDiv.id = "line";
-
-                    // Add three elements to the page
+                    // Add two elements to the page
                     dataDiv.appendChild(newImg);
                     dataDiv.appendChild(newDiv1);
-                    dataDiv.appendChild(newDiv);
+
+                    const dataDiv2 = document.getElementById('donation');
+                    dataDiv2.innerHTML = "";
 
 
 
-
-
-                });
-
-            }
-            // If no corresponding data is found, an error message will be displayed
-            else {
-                dataDiv.textContent = "No fundraiser data";
-            }
-        })
-        .catch(error => {
-            console.error("Error fecthing data", error);
-            document.getElementById('data').textContent = "Failed to load data";
-        });
-
+                }
+                // If no corresponding data is found, an error message will be displayed
+                else {
+                    dataDiv.textContent = "No fundraiser data";
+                }
+            })
+            .catch(error => {
+                console.error("Error fecthing data", error);
+                document.getElementById('data').textContent = "Failed to load data";
+            });
 
         /**
          * 
@@ -277,7 +271,7 @@
          * @param active
          * 
          */
-         function changeToActiveOrInactive(active) {
+        function changeToActiveOrInactive(active) {
             if (active === 1) {
                 return "Active";
             } else {
@@ -285,6 +279,71 @@
             }
         }
 
-</script>
+
+        function insertDonation() {
+            // console.log("insertDonation function called");
+            var crowedfunding = data1[0];
+            // Get values from the form using DOM
+            const Giver = document.getElementById('giver').value.trim();
+            const Amount = document.getElementById('amount').value.trim();
+            const Date = document.getElementById('date').value.trim();
+            const FundraiserID = crowedfunding.FUNDRAISER_ID;
+
+            console.log(Giver);
+            console.log(Amount);
+            console.log(Date);
+            console.log(FundraiserID);
+
+            console.log(!Giver, !Amount, !Date);
+            // Validate the form. Assume, all fields are required
+            if (Giver === "" || Amount === "" || Date === "") {
+                alert("All fields are required!");
+                return;
+            } 
+
+
+            // At least 5 AUD allowed for donation. Otherwise, 
+            // show a dialog box saying that the minimum of donation is 5 AUD
+            if (Amount > 5) {
+                alert("the minimum of donation is 5 AUD!");
+                return;
+            }
+
+            // Create a data (JSON) to send in the POST request
+            const postData = { 'DATE': Date, 'AMOUNT': Amount, 'GIVER': Giver, 'FUNDRAISER_ID': FundraiserID };
+            //alert(JSON.stringify(postData));
+
+            // Send the POST request to NodeJS API server
+            fetch('http://localhost:3060/api/crowdfunding/donation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.insert === 'success') {
+                        confirm(`Thank you for your donation to ${crowedfunding.ORGANIZER}`);
+                        document.location.href = "/fundraisers";
+                        document.getElementById('form1').reset(); // to clear the form                    
+                    } else if (data.insert === 'error') {
+                        alert("Error: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+
+
+
+
+
+    </script>
+
+
+
+</body>
 
 </html>

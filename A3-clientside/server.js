@@ -46,12 +46,14 @@ app.get("/fundraisers", (req, res) => {
 
 /**
  * 
- * route to serve donation.html
+ * route to serve fundraisers.html
  * 
  */
 app.get("/donation", (req, res) => {
   res.sendFile(path.join(__dirname, "donation.html"));
 });
+
+
 
 /**
  * 

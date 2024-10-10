@@ -220,11 +220,11 @@ router.put("/update_fundraiser/:id", (req, res) => {
 router.delete("/delete_fundraiser/:id", (req, res) => {
 
 
-  connection.query(`SELECT f.FUNDRAISER_ID, d.AMOUNT
-    FROM FUNDRAISER f
-    JOIN DONATION d ON f.FUNDRAISER_ID = d.FUNDRAISER_ID
-    WHERE f.ACTIVE = true
-    AND f.FUNDRAISER_ID = `  + req.params.id, (err, records, fields) => {
+  connection.query("SELECT f.FUNDRAISER_ID, d.AMOUNT " +
+    "FROM FUNDRAISER f " +
+    "JOIN DONATION d ON f.FUNDRAISER_ID = d.FUNDRAISER_ID " +
+    "WHERE f.ACTIVE = true " +
+    "AND f.FUNDRAISER_ID = "  + req.params.id, (err, records, fields) => {
     if (err) {
       console.error("Error while deleting the data");
     } 
