@@ -24,42 +24,29 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-
 /**
  * 
- * route to serve search_fundraisers.html
+ * route to serve insert_fundraiser.html
  * 
  */
-app.get("/search_fundraisers", (req, res) => {
-  res.sendFile(path.join(__dirname, "search_fundraisers.html"));
-});
-
-
-/**
- * 
- * route to serve fundraisers.html
- * 
- */
-app.get("/fundraisers", (req, res) => {
-  res.sendFile(path.join(__dirname, "fundraisers.html"));
+app.get("/insert_fundraiser", (req, res) => {
+  res.sendFile(path.join(__dirname, "insert_fundraiser.html"));
 });
 
 /**
  * 
- * route to serve fundraisers.html
+ * route to serve update_fundraiser.html
  * 
  */
-app.get("/donation", (req, res) => {
-  res.sendFile(path.join(__dirname, "donation.html"));
+app.get("/update_fundraiser", (req, res) => {
+  res.sendFile(path.join(__dirname, "update_fundraiser.html"));
 });
-
-
 
 /**
  * 
- * Start the server on port 8080
+ * Start the server on port 8081
  * 
  */
-app.listen(8080, () => {
-  console.log("Running in 8080");
+app.listen(8081, () => {
+  console.log("Running in 8081");
 });
