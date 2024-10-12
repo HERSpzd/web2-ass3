@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home (Admin side)</title>
     <style>
         /* Set the style of the entire page */
         body {
@@ -126,25 +126,20 @@
 
 <body>
     <!-- Main title -->
-    <h1>Crowdfunding Platform</h1>
+    <h1>Crowdfunding Platform (Admin side)</h1>
 
     <!-- Navigation -->
     <ul id="nav">
         <li><a href="/"><span>Home</span></a></li>
-        <li><a href="/search_fundraisers"><span>Search Fundraisers</span></a></li>
-        <li><a href="/fundraisers"><span>Fundraisers</span></a></li>
-        <li><a href="/donation"><span>Donation</span></a></li>
+        <li><a href="/insert_fundraiser"><span>Insert Fundraiser</span></a></li>
+        <li><a href="/update_fundraiser"><span>Update Fundraiser</span></a></li>
     </ul>
-
-    <!-- Welcome message -->
-    <div id="title">
-        <h2>Wlcome to leading crowdfunding platform!</h2>
 
     </div>
     <div id="box1">
         <!-- Active fundraisers -->
         <div id="active-fundraisers">
-            <h3 id="subtitle">All of the active fundraisers</h3>
+            <h3 id="subtitle">All of the fundraisers</h3>
             <div id="all-fundraisers"></div>
 
 
@@ -213,7 +208,7 @@
      * 
      * 
      */
-    fetch("http://localhost:3060/api/crowdfunding/fundraisers")  //Send request URL and respond
+    fetch("http://localhost:3060/api/crowdfunding/all_fundraisers")  //Send request URL and respond
         .then(response => response.json())
         .then(data => {
 
@@ -231,6 +226,7 @@
                         newImg.src = `image/image.png`;
                     }
 
+
                     // Create a div element to display all active fundraisers
                     const newDiv1 = document.createElement("div");
                     // Name its ID as 'content'
@@ -243,7 +239,8 @@
                                         Current funding: ${crowedfunding.CURRENT_FUNDING} AUD<br> 
                                         City: ${crowedfunding.CITY} <br> 
                                         Active: ${changeToActiveOrInactive(crowedfunding.ACTIVE)} <br> 
-                                        Category: ${crowedfunding.CATEGORY_NAME} <br>`;
+                                        Category: ${crowedfunding.CATEGORY_NAME} <br><br>
+                                        <a id="update" href="/update_fundraiser" onclick="saveId(${crowedfunding.FUNDRAISER_ID})">Update</a>&nbsp;&nbsp;<a id="delete" onclick="deleteByID(${crowedfunding.FUNDRAISER_ID})" href="#" >Delete</a>`;
 
                     // Display a blue line under the fundraisers
                     const newDiv = document.createElement("div");
@@ -272,23 +269,64 @@
         });
 
 
-        /**
-         * 
-         * Function changeToActiveOrInactive
-         * 
-         * Change 1 to "Active" and also change
-         * 2 to "Inactive"
-         * 
-         * @param active
-         * 
-         */
-         function changeToActiveOrInactive(active) {
-            if (active === 1) {
-                return "Active";
-            } else {
-                return "Inactive";
+    function deleteByID(id) {
+        // Send DELETE request to API
+        fetch('http://localhost:3060/api/crowdfunding/delete_fundraiser/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
             }
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.delete + "! Please refrech this page to check!");
+                if (data.delete === 'success') {
+                    alert("Fundraiser deleted successfully!");
+                } else if (data.delete === 'error') {
+                    alert("Error: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+    }
+
+
+    /**
+     * 
+     * Function changeToActiveOrInactive
+     * 
+     * Change 1 to "Active" and also change
+     * 2 to "Inactive"
+     * 
+     * @param active
+     * 
+     */
+    function changeToActiveOrInactive(active) {
+        if (active === 1) {
+            return "Active";
+        } else {
+            return "Inactive";
         }
+    }
+
+    /**
+     * 
+     *  saveId function
+     * 
+     * Use sessionStorage in the client's browser to save
+     * the ID of the organizer retrieved from the search. 
+     * This ID will be used on the Fundraisers page
+     * 
+     * @param id
+     * 
+     */
+    function saveId(id) {
+        var saveId = id;
+        if (typeof (Storage) !== 'undefined') {
+            sessionStorage.setItem('id', saveId);
+        }
+    }
 
 </script>
 
