@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fundraisers</title>
+    <title>Update Fundraiser (Admin side)</title>
     <style>
         /* Set the style of the entire page */
         body {
@@ -130,29 +130,58 @@
 
 <body>
     <!-- Main title -->
-    <h1>Crowdfunding Platform</h1>
+    <h1>Crowdfunding Platform (Admin side)</h1>
 
     <!-- Navigation -->
     <ul id="nav">
         <li><a href="/"><span>Home</span></a></li>
-        <li><a href="/search_fundraisers"><span>Search Fundraisers</span></a></li>
-        <li><a href="/fundraisers"><span>Fundraisers</span></a></li>
-        <li><a href="/donation"><span>Donation</span></a></li>
+        <li><a href="/insert_fundraiser"><span>Insert Fundraiser</span></a></li>
+        <li><a href="/update_fundraiser"><span>Update Fundraiser</span></a></li>
     </ul>
 
 
     <div id="box1">
         <!-- Fundraisers details -->
         <div id="fundraisers-details1">
-            <h3 id="subtitle">Fundraisers details</h3>
+            
 
-            <div id="fundraisers-details"></div>
+            <h3 id="subtitle">Update the fundraiser</h3>
 
-            <div id="data"></div>
+            <form id="form1" onsubmit="return(false);">
+                <br>Organizer:<br>
+                <input type="text" id="organizer" placeholder="Input organizer" required><br><br>
+                Caption:<br>
+                <input type="text" id="caption" placeholder="Input caption" required><br><br>
+                Target Funding:<br>
+                <input type="text" id="target-funding" placeholder="Input target funding (AUD)" required><br><br>
+                Current Funding:<br>
+                <input type="text" id="current-funding" placeholder="Input current funding (AUD)" required><br><br>
+                City:<br>
+                <input type="text" id="city" placeholder="Input city" required><br><br>
+                Active:<br>
+                <select id="active" required>
+                    <option value="">SELECT...</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select> <br><br>
+                Category:<br>
+                <select id="category" required>
+                    <option value="">SELECT...</option>
+                    <option value="1">Emergency</option>
+                    <option value="2">Business</option>
+                    <option value="3">Medical</option>
+                    <option value="4">Education</option>
+                    <option value="5">Sports</option>
+                    <option value="6">Travel</option>
+                    <option value="7">Environment</option>
+                    <option value="8">Volunteer</option>
+                </select> <br><br>
+                <input type="submit" onclick="updateFundraiser()" value="SAVE" id="donate">
+            </form>
 
             <h3 id="subtitle">Donation details</h3>
 
-            <div id="donation"></div>
+            <div id="Donation-details"></div>
 
             <div id="data"></div>
 
@@ -188,130 +217,7 @@
     <script>
         // Retrieve the ID value obtained from the browser
         var id = sessionStorage.getItem('id');
-
-        // For debugging purpose
-        console.log(id);
-        console.log(`http://localhost:3060/api/crowdfunding/fundraisers/${id}`);
-
-        /**
-         * 
-         * Retrieve data from the server and display 
-         * detailed information of the searched fundraiser
-         * 
-         */
-        fetch(`http://localhost:3060/api/crowdfunding/fundraisers/${id}`)
-            .then(response => response.json())
-            .then(data => {
-
-                // Get the div with ID 'fundraisers-details'
-                const dataDiv = document.getElementById('fundraisers-details');
-                dataDiv.innerHTML = "";
-
-                if (data.length > 0) {
-                    var crowedfunding = data[0];
-                    // Create img element to display images on the page
-                    const newImg = document.createElement("img");
-                    if (crowedfunding.FUNDRAISER_ID <= 5) {
-                        newImg.src = `image/image${crowedfunding.FUNDRAISER_ID}.png`;
-                    } else {
-                        newImg.src = `image/image.png`;
-                    }
-
-                    console.log(crowedfunding.FUNDRAISER_ID)
-                    // Create a div element to display the searched fundraisers
-                    const newDiv1 = document.createElement("div");
-                    // Name its ID as 'content'
-                    newDiv1.id = "content";
-                    // Display some details of searched fundraisers
-                    newDiv1.innerHTML = `<strong>Organizer: ${crowedfunding.ORGANIZER}</strong> <br> 
-                                            ID: ${crowedfunding.FUNDRAISER_ID} <br> 
-                                            Caption: ${crowedfunding.CAPTION} <br> 
-                                            Target funding: ${crowedfunding.TARGET_FUNDING} AUD<br> 
-                                            Current funding: ${crowedfunding.CURRENT_FUNDING} AUD<br> 
-                                            City: ${crowedfunding.CITY} <br> 
-                                            Active: ${changeToActiveOrInactive(crowedfunding.ACTIVE)} <br> 
-                                            Category: ${crowedfunding.CATEGORY_NAME} <br><br>
-                                            <button id="donate" onclick="document.location='/donation'" onclick="donateAlert();">Donate</button>`;
-
-
-
-                    // Add two elements to the page
-                    dataDiv.appendChild(newImg);
-                    dataDiv.appendChild(newDiv1);
-                    // dataDiv.appendChild(newButton);
-
-                    const dataDiv2 = document.getElementById('donation');
-                    dataDiv2.innerHTML = "";
-                    if (crowedfunding.GIVER === null) {
-                        return;
-                    }
-
-                    data.forEach(crowedfunding => {
-
-                        // Create a div element to display the searched fundraisers
-                        const newDiv2 = document.createElement("div");
-                        // Name its ID as 'content1'
-                        newDiv2.id = "content1";
-                        // Display some details of searched fundraisers
-                        newDiv2.innerHTML = `<strong>Giver: ${crowedfunding.GIVER}</strong> <br> 
-                                            ID: ${crowedfunding.DONATION_ID} <br> 
-                                            Amount: ${crowedfunding.AMOUNT} AUD<br> 
-                                            Date: ${crowedfunding.DATE} <br> `;
-
-
-
-
-                        const newDiv3 = document.createElement("div");
-                        newDiv3.id = "line";
-
-
-                        // Add to the page
-                        dataDiv2.appendChild(newDiv2);
-                        dataDiv2.appendChild(newDiv3);
-                    });
-
-
-                }
-                // If no corresponding data is found, an error message will be displayed
-                else {
-                    dataDiv.textContent = "No donation data";
-                }
-            })
-            .catch(error => {
-                console.error("Error fecthing data", error);
-                document.getElementById('data').textContent = "Failed to load data";
-            });
-
-        /**
-         * 
-         * Updated Function donateAlert
-         * 
-         * Once the donate button is clicked, it will 
-         * show a dialog window saying 
-         * "This feature is under contruction".
-         * 
-         */
-        function donateAlert() {
-            // alert("This feature is under contruction");
-            // location.href = "/donation";
-            var saveId = id;
-            if (typeof (Storage) !== 'undefined') {
-                sessionStorage.setItem('id', saveId);
-            }
-        }
-
-        /**
-         * 
-         * Function removeSessionStorage
-         * 
-         * Once the donate button is clicked,
-         * the browser will delete the stored ID value
-         * 
-         */
-        function removeSessionStorage() {
-            sessionStorage.removeItem('id');
-        }
-
+        console.log(`http://localhost:3060/api/crowdfunding/update_fundraiser/${id}`)
 
         /**
          * 
@@ -330,6 +236,118 @@
                 return "Inactive";
             }
         }
+
+
+        function updateFundraiser() {
+            // Get values from the form using DOM
+            const organizer = document.getElementById('organizer').value.trim();
+            const caption = document.getElementById('caption').value.trim();
+            const targetFunding = document.getElementById('target-funding').value.trim();
+            const currentFunding = document.getElementById('current-funding').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const active = document.getElementById('active').value;
+            const categoryID = document.getElementById('category').value;
+
+            console.log(organizer);
+            console.log(caption);
+            console.log(targetFunding);
+            console.log(currentFunding);
+            console.log(city);
+            console.log(active);
+            console.log(categoryID);
+
+
+            // Validate the form. Assume, all fields are required
+            if (organizer === "" || caption === "" || targetFunding === null || currentFunding === null || city === "" || active === "SELECT..." || categoryID === "SELECT...") {
+                alert("All fields are required!");
+                return;
+            }
+
+
+            // Create a data (JSON) to send in the POST request
+            const putData = { 'ORGANIZER': organizer, 'CAPTION': caption, 'TARGET_FUNDING': targetFunding, 'CURRENT_FUNDING': currentFunding, 'CITY': city, 'ACTIVE': active, 'CATEGORY_ID': categoryID };
+            //alert(JSON.stringify(postData)); 
+
+
+
+            // Send the POST request to NodeJS API server
+            fetch(`http://localhost:3060/api/crowdfunding/update_fundraiser/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(putData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.insert === 'success') {
+                        document.getElementById('form1').reset(); // to clear the form                    
+                    } else if (data.insert === 'error') {
+                        alert("Error: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        }
+
+
+        
+
+        // For debugging purpose
+        console.log(id);
+        console.log(`http://localhost:3060/api/crowdfunding/fundraisers/${id}`);
+
+        /**
+         * 
+         * Retrieve data from the server and display 
+         * detailed information of the searched fundraiser
+         * 
+         */
+        fetch(`http://localhost:3060/api/crowdfunding/fundraisers/${id}`)
+            .then(response => response.json())
+            .then(data => {
+
+                // Get the div with ID 'fundraisers-details'
+                const dataDiv = document.getElementById('Donation-details');
+                dataDiv.innerHTML = "";
+
+                if (data.length > 0) {
+                    var crowedfunding = data[0];
+
+                    if (crowedfunding.GIVER === null) {
+                        return;
+                    }
+
+                    // Create a div element to display the searched fundraisers
+                    const newDiv1 = document.createElement("div");
+                    // Name its ID as 'content'
+                    // newDiv1.id = "content";
+                    // Display some details of searched fundraisers
+                    newDiv1.innerHTML = `<strong>Giver: ${crowedfunding.GIVER}</strong> <br> 
+                                            ID: ${crowedfunding.DONATION_ID} <br> 
+                                            Amount: ${crowedfunding.AMOUNT} AUD<br> 
+                                            Date: ${crowedfunding.DATE} <br> `;
+                    // Display a blue line under the fundraisers
+                    const newDiv = document.createElement("div");
+                    newDiv.id = "line";
+
+                    // Add two elements to the page
+                    dataDiv.appendChild(newDiv1);
+                    dataDiv.appendChild(newDiv);
+                }
+                // If no corresponding data is found, an error message will be displayed
+                else {
+                    dataDiv.textContent = "No donation data";
+                }
+            })
+            .catch(error => {
+                console.error("Error fecthing data", error);
+                document.getElementById('data').textContent = "Failed to load data";
+            });
+
+
+
 
 
 
