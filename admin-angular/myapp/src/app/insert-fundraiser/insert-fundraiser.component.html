@@ -21,11 +21,12 @@
     </ul>
 
 
+    <!-- Insert a new fundraiser form -->
     <div id="box1">
         <div id="fundraisers-details1">
             <h3 id="subtitle">Insert a new fundraiser</h3>
 
-            <form (ngSubmit)="insertFundraiser()">
+            <form (ngSubmit)="insertFundraiser()" id="form1">
                 <label for="organizer">Organizer:</label><br>
                 <input type="text" id="organizer" placeholder="Input organizer" [(ngModel)]="organizer" name="organizer"
                     required><br><br>

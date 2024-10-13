@@ -20,12 +20,12 @@
         <li><a routerLink="/update-fundraiser"><span>Update Fundraiser</span></a></li>
     </ul>
 
-
+    <!-- Update the fundraiser form -->
     <div id="box1">
         <div id="fundraisers-details1">
             <h3 id="subtitle">Update the fundraiser</h3>
 
-            <form (ngSubmit)="updateFundraiser()" #form1="ngForm">
+            <form (ngSubmit)="updateFundraiser()" #form1="ngForm" id="form1">
                 <label>Organizer:</label><br>
                 <input type="text" id="organizer" placeholder="Input organizer" required [(ngModel)]="organizer"
                     name="organizer"><br><br>
