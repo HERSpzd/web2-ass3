@@ -1,0 +1,101 @@
+<!-- Insert Fundraisers page -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Fundraiser (Admin side)</title>
+
+</head>
+
+<body>
+    <!-- Main title -->
+    <h1>Crowdfunding Platform (Admin side)</h1>
+
+    <!-- Navigation -->
+    <ul id="nav">
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/insert-fundraiser">Insert Fundraiser</a></li>
+        <li><a routerLink="/update-fundraiser">Update Fundraiser</a></li>
+    </ul>
+
+
+    <div id="box1">
+        <div id="fundraisers-details1">
+            <h3 id="subtitle">Insert a new fundraiser</h3>
+
+            <form (ngSubmit)="insertFundraiser()">
+                <label for="organizer">Organizer:</label><br>
+                <input type="text" id="organizer" placeholder="Input organizer" [(ngModel)]="organizer" name="organizer"
+                    required><br><br>
+
+                <label for="caption">Caption:</label><br>
+                <input type="text" id="caption" placeholder="Input caption" [(ngModel)]="caption" name="caption"
+                    required><br><br>
+
+                <label for="target-funding">Target Funding:</label><br>
+                <input type="text" id="target-funding" placeholder="Input target funding (AUD)"
+                    [(ngModel)]="targetFunding" name="targetFunding" required><br><br>
+
+                <label for="current-funding">Current Funding:</label><br>
+                <input type="text" id="current-funding" [(ngModel)]="currentFunding"
+                    placeholder="Input current funding (AUD)" name="currentFunding" required><br><br>
+
+                <label for="city">City:</label><br>
+                <input type="text" id="city" [(ngModel)]="city" placeholder="Input city" name="city" required><br><br>
+
+                <label for="active">Active:</label><br>
+                <select id="active" [(ngModel)]="active" name="active" required>
+                    <option value="">SELECT...</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select><br><br>
+
+                <label for="category">Category:</label><br>
+                <select id="category" [(ngModel)]="categoryID" name="categoryID" required>
+                    <option value="">SELECT...</option>
+                    <option value="1">Emergency</option>
+                    <option value="2">Business</option>
+                    <option value="3">Medical</option>
+                    <option value="4">Education</option>
+                    <option value="5">Sports</option>
+                    <option value="6">Travel</option>
+                    <option value="7">Environment</option>
+                    <option value="8">Volunteer</option>
+                </select><br><br>
+
+                <button type="submit">SAVE</button>
+            </form>
+        </div>
+
+        <!-- Operation guide of this page -->
+        <div id="box">
+            <div id="operation-guide">
+                <h3 id="subtitle">The guide of this page</h3>
+                <p>This page is used to add a new fundraiser. All information should be filled in, and then click SAVE
+                    to add a fundraiser</p>
+
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer section -->
+    <footer>
+        <!-- contact info -->
+        <div id="contact-info">
+            <h3>Contact infomation</h3>
+            <p>Email: crowdfunding#gmail.com</p>
+            <p>Telephone: 0772-1234567890</p>
+            <!-- Purpose of Public Welfare Organization -->
+            <h5>Your support is the seed of hope!</h5>
+        </div>
+    </footer>
+
+</body>
+
+</html>

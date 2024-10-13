@@ -329,7 +329,7 @@
 
             // At least 5 AUD allowed for donation. Otherwise, 
             // show a dialog box saying that the minimum of donation is 5 AUD
-            if (Amount > 5) {
+            if (Amount < 5) {
                 alert("the minimum of donation is 5 AUD!");
                 return;
             }

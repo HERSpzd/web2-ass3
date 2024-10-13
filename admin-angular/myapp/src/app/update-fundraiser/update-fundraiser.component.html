@@ -1,0 +1,119 @@
+<!-- Updated Fundraisers page -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Fundraiser (Admin side)</title>
+
+</head>
+
+<body>
+    <!-- Main title -->
+    <h1>Crowdfunding Platform (Admin side)</h1>
+
+    <!-- Navigation -->
+    <ul id="nav">
+        <li><a routerLink="/"><span>Home</span></a></li>
+        <li><a routerLink="/insert-fundraiser"><span>Insert Fundraiser</span></a></li>
+        <li><a routerLink="/update-fundraiser"><span>Update Fundraiser</span></a></li>
+    </ul>
+
+
+    <div id="box1">
+        <div id="fundraisers-details1">
+            <h3 id="subtitle">Update the fundraiser</h3>
+
+            <form (ngSubmit)="updateFundraiser()" #form1="ngForm">
+                <label>Organizer:</label><br>
+                <input type="text" id="organizer" placeholder="Input organizer" required [(ngModel)]="organizer"
+                    name="organizer"><br><br>
+
+                <label>Caption:</label><br>
+                <input type="text" id="caption" placeholder="Input caption" required [(ngModel)]="caption"
+                    name="caption"><br><br>
+
+                <label>Target Funding:</label><br>
+                <input type="text" id="target-funding" placeholder="Input target funding (AUD)" required
+                    [(ngModel)]="targetFunding" name="targetFunding"><br><br>
+
+                <label>Current Funding:</label><br>
+                <input type="text" id="current-funding" placeholder="Input current funding (AUD)" required
+                    [(ngModel)]="currentFunding" name="currentFunding"><br><br>
+
+                <label>City:</label><br>
+                <input type="text" id="city" placeholder="Input city" required [(ngModel)]="city" name="city"><br><br>
+
+                <label>Active:</label><br>
+                <select id="active" required [(ngModel)]="active" name="active">
+                    <option value="">SELECT...</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select><br><br>
+
+                <label>Category:</label><br>
+                <select id="category" required [(ngModel)]="categoryID" name="categoryID">
+                    <option value="">SELECT...</option>
+                    <option value="1">Emergency</option>
+                    <option value="2">Business</option>
+                    <option value="3">Medical</option>
+                    <option value="4">Education</option>
+                    <option value="5">Sports</option>
+                    <option value="6">Travel</option>
+                    <option value="7">Environment</option>
+                    <option value="8">Volunteer</option>
+                </select><br><br>
+
+                <button type="submit" id="donate">SAVE</button>
+            </form>
+
+            <h3 id="subtitle">Donation details</h3>
+            <div *ngIf="donationDetails && donationDetails.length > 0">
+                <div *ngFor="let donation of donationDetails">
+                    <div *ngIf="donation.GIVER">
+                        <strong>Giver: {{ donation.GIVER }}</strong> <br>
+                        ID: {{ donation.DONATION_ID }} <br>
+                        Amount: {{ donation.AMOUNT }} AUD<br>
+                        Date: {{ donation.DATE }} <br>
+                        <div id="line"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+        <!-- Operation guide of this page -->
+        <div id="box">
+            <div id="operation-guide">
+                <h3 id="subtitle">The guide of this page</h3>
+                <p>This page is used to update a fundraiser. All information should be filled in, and then click SAVE to
+                    update the fundraiser. There is also relevant donation information at the bottom of this page</p>
+
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer section -->
+    <footer>
+        <!-- contact info -->
+        <div id="contact-info">
+            <h3>Contact infomation</h3>
+            <p>Email: crowdfunding#gmail.com</p>
+            <p>Telephone: 0772-1234567890</p>
+            <!-- Purpose of Public Welfare Organization -->
+            <h5>Your support is the seed of hope!</h5>
+        </div>
+    </footer>
+
+</body>
+
+</html>

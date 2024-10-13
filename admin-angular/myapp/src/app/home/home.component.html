@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home (Admin side)</title>
+</head>
+
+<body>
+    <!-- Main title -->
+    <h1>Crowdfunding Platform (Admin side)</h1>
+
+    <!-- Navigation -->
+    <ul id="nav">
+        <li><a routerLink="/"><span>Home</span></a></li>
+        <li><a routerLink="/insert-fundraiser"><span>Insert Fundraiser</span></a></li>
+        <li><a routerLink="/update-fundraiser"><span>Update Fundraiser</span></a></li>
+    </ul>
+
+
+    <div id="box1">
+        <div id="active-fundraisers">
+            <h3 id="subtitle">All of the fundraisers</h3>
+            <div id="all-fundraisers">
+                <div *ngFor="let fundraiser of fundraisers">
+                    <img [src]="getImage(fundraiser.FUNDRAISER_ID)" alt="Fundraiser Image">
+                    <div id="content">
+                        <strong>Organizer: {{ fundraiser.ORGANIZER }}</strong> <br>
+                        ID: {{ fundraiser.FUNDRAISER_ID }} <br>
+                        Caption: {{ fundraiser.CAPTION }} <br>
+                        Target funding: {{ fundraiser.TARGET_FUNDING }} AUD<br>
+                        Current funding: {{ fundraiser.CURRENT_FUNDING }} AUD<br>
+                        City: {{ fundraiser.CITY }} <br>
+                        Active: {{ changeToActiveOrInactive(fundraiser.ACTIVE) }} <br>
+                        Category: {{ fundraiser.CATEGORY_NAME }} <br><br>
+                        <a id="update" routerLink="/update-fundraiser" (click)="saveId(fundraiser.FUNDRAISER_ID)">Update</a>
+                        &nbsp;&nbsp;
+                        <a id="delete" href="#" (click)="deleteByID(fundraiser.FUNDRAISER_ID)">Delete</a>
+                    </div>
+                    <div id="line"></div>
+                </div>
+            </div>
+            <div id="data" *ngIf="errorMessage">{{ errorMessage }}</div>
+        </div>
+
+        <div id="box">
+            <div id="about-us">
+                <!-- About us section -->
+                <h3 id="subtitle">About us</h3>
+                <p>We are a non-profit organization dedicated to helping individuals and groups in need. This is our
+                    crowdfunding platform, through which you can easily contribute your efforts to worthy causes.
+                    Our platform is committed to transparency, efficiency, and directness. Every fundraising project
+                    undergoes
+                    strict review to ensure that your donations directly reach those who need them the most. You can
+                    easily
+                    browse various fundraising projects and choose the ones to support based on your interests and
+                    values.
+                    From
+                    medical assistance to educational support, from crisis relief to social innovation, there are
+                    various
+                    projects here that require your assistance.</p>
+            </div>
+            <br>
+
+            <!-- Two Inspiring stories here -->
+            <div id="inspiring-stories">
+                <h3 id="subtitle">Inspiring stories</h3>
+                <h4>Story 1</h4>
+                <p>A team of young farmers with a dream to build an innovative farm-one that is to be based on renewable
+                    energy
+                    and sustainable agriculture. Huge support was given to this idea on our platform. Today, this farm
+                    provides
+                    not only organic food for the local community but also an educational center of sustainable
+                    agriculture,
+                    with many visitors and learners from all over the country coming to visit.</p>
+                <h4>Story 2</h4>
+                <p>A young team of marine biologists, passionate in the study of the ocean, have long been on the dream
+                    of setting up a marine protected area and a research center. The aim is not just protection but also
+                    the education of the masses on the essence of ocean conservation. This ambitious project has
+                    gathered serious interest on our crowdfunding platform.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+        <!-- contact info -->
+        <div id="contact-info">
+            <h3>Contact infomation</h3>
+            <p>Email: crowdfunding#gmail.com</p>
+            <p>Telephone: 0772-1234567890</p>
+            <!-- Purpose of Public Welfare Organization -->
+            <h5>Your support is the seed of hope!</h5>
+        </div>
+    </footer>
+
+</body>
+
+
+
+</html>

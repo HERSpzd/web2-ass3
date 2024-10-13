@@ -1,0 +1,114 @@
+/* Set the style of h1 */
+h1 {
+    text-align: center;
+}
+
+/* Set the style of the navigation bar */
+#nav {
+    text-align: center;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    background-color: rgb(50, 142, 203);
+    width: 80%;
+}
+
+#nav li {
+    display: inline-block;
+}
+
+#nav li a {
+    display: block;
+    padding: 10px 20px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Mouse over to change color */
+#nav li a:hover {
+    background-color: #0069d9;
+}
+
+/* Set box1 container style */
+#box1 {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+    margin-top: 15px;
+}
+
+/* Set 'fundraisers-details1' Container Style */
+#fundraisers-details1 {
+    width: 70%;
+    float: left;
+    margin-right: 10px;
+}
+
+/* Set box container style */
+#box {
+    width: 29%;
+    float: right;
+}
+
+
+/* Set 'operation-guide' Container Style */
+#operation-guide {
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+/* Set the dividing line for each subheading */
+#subtitle,
+#line {
+    width: 98%;
+    border-bottom: 1.5px solid #0056b3;
+    padding-bottom: 10px;
+    display: inline-block;
+    margin-bottom: 0.5px;
+}
+
+/* Set 'fundraisers-details1' Container Style */
+#fundraisers-details1 {
+    margin-bottom: 20%;
+}
+
+/* Set the style of details of fundraisers  */
+#content {
+    float: right;
+    margin-top: 4%;
+    margin-left: 0;
+    margin-right: 20px;
+    width: 40%;
+    padding-right: 10px;
+}
+
+/* Set image style */
+#fundraisers-details img {
+    float: left;
+    width: 40%;
+    height: auto;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+/* Set the style of the button */
+#donate {
+    width: 20%;
+    height: 30px;
+
+}
+
+
+/* Set the style of the footer */
+footer {
+    text-align: center;
+    clear: both;
+    padding: 3px;
+    background-color: rgb(50, 142, 203);
+    color: white;
+}

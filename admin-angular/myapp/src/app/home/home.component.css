@@ -1,0 +1,109 @@
+/* Set the style of h1 */
+h1 {
+    text-align: center;
+}
+
+/* Set the style of welcome message */
+#title {
+    text-align: center;
+
+}
+
+/* Set the style of the navigation bar */
+#nav {
+    text-align: center;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    background-color: rgb(50, 142, 203);
+    width: 80%;
+}
+
+#nav li {
+    display: inline-block;
+}
+
+#nav li a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    /* Clear underline */
+    text-decoration: none;
+
+}
+
+/* Mouse over to change color */
+#nav li a:hover {
+    background-color: #0069d9;
+}
+
+/* Set a background box for 'about us' and 'inspiring stories' */
+#about-us,
+#inspiring-stories {
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 5px;
+    /* Set Shadow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+/* Set box1 container style */
+#box1 {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Set box container style */
+#box {
+    width: 30%;
+    /* Right floating */
+    float: right;
+}
+
+/* Set 'active-fundraisers' Container Style */
+#active-fundraisers {
+    width: 70%;
+    /* Left floating */
+    float: left;
+}
+
+/* Set the dividing line for each subheading */
+#subtitle,
+#line {
+    width: 98%;
+    border-bottom: 1.5px solid #0056b3;
+    padding-bottom: 2%;
+    display: inline-block;
+    margin-bottom: 1%;
+}
+
+/* Set the style of details of fundraisers  */
+#content {
+    float: right;
+    margin-top: 2%;
+    margin-left: 0;
+    width: 50%;
+
+}
+
+/* Set image style */
+#all-fundraisers img {
+    float: left;
+    width: 30%;
+    height: auto;
+    margin-left: 15%;
+    margin-top: 3%;
+}
+
+/* Set the style of the footer */
+footer {
+    text-align: center;
+    clear: both;
+    padding: 3px;
+    background-color: rgb(50, 142, 203);
+    color: white;
+}
