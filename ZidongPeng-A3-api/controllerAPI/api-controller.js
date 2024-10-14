@@ -156,18 +156,20 @@ router.get("/search", (req, res) => {
  * Updated get method
  * 
  * Get the details of a fundraiser (by ID) 
- * from the database
+ * from the database  including the list of 
+ * donations made for the fundraiser from 
+ * the database
  * 
  * @param FUNDRAISER_ID
  * 
  */
 router.get("/fundraisers/:id", (req, res) => {
-  connection.query(`SELECT f.*, c.NAME AS CATEGORY_NAME, d.DONATION_ID, d.DATE, d.AMOUNT, d.GIVER
-    FROM FUNDRAISER f
-    JOIN CATEGORY c ON f.CATEGORY_ID = c.CATEGORY_ID
-    LEFT JOIN DONATION d ON f.FUNDRAISER_ID = d.FUNDRAISER_ID
-    WHERE f.ACTIVE = true
-    AND f.FUNDRAISER_ID = `  + req.params.id, (err, records, fields) => {
+  connection.query("SELECT f.*, c.NAME AS CATEGORY_NAME, d.DONATION_ID, d.DATE, d.AMOUNT, d.GIVER " +
+    "FROM FUNDRAISER f " +
+    "JOIN CATEGORY c ON f.CATEGORY_ID = c.CATEGORY_ID " +
+    "LEFT JOIN DONATION d ON f.FUNDRAISER_ID = d.FUNDRAISER_ID " +
+    "WHERE f.ACTIVE = true " +
+     "AND f.FUNDRAISER_ID = "  + req.params.id, (err, records, fields) => {
     if (err) {
       console.error("Error while retrieve the data");
     } else {
@@ -176,7 +178,16 @@ router.get("/fundraisers/:id", (req, res) => {
   })
 })
 
-
+/**
+ * 
+ * 
+ * POST method
+ * 
+ * Insert a new donation for a nominated fundraiser
+ * 
+ * 
+ * 
+ */
 router.post("/donation", (req, res) => {
   var date = req.body.DATE;
   var amount = req.body.AMOUNT;
@@ -192,6 +203,15 @@ router.post("/donation", (req, res) => {
     })
 })
 
+/**
+ * 
+ * 
+ * POST method
+ * 
+ * insert a new fundraiser into the database
+ * 
+ * 
+ */
 router.post("/insert_fundraiser", (req, res) => {
   var organizer = req.body.ORGANIZER;
   var caption = req.body.CAPTION;
@@ -211,6 +231,16 @@ router.post("/insert_fundraiser", (req, res) => {
     })
 })
 
+/**
+ * 
+ * 
+ * PUT method
+ * 
+ * update an existing fundraiser based on the given ID
+ * 
+ * @param id
+ * 
+ */
 router.put("/update_fundraiser/:id", (req, res) => {
   // var fundraiserID = req.body.FUNDRAISER_ID;
   var organizer = req.body.ORGANIZER;
@@ -237,6 +267,16 @@ router.put("/update_fundraiser/:id", (req, res) => {
     })
 })
 
+/**
+ * 
+ * DELETE method
+ * 
+ * 
+ * delete an existing fundraiser based on the given ID
+ * 
+ * @param id
+ * 
+ */
 router.delete("/delete_fundraiser/:id", (req, res) => {
 
 

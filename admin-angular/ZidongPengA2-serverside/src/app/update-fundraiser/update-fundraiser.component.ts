@@ -10,8 +10,8 @@ export class UpdateFundraiserComponent implements OnInit {
   id1 = sessionStorage.getItem('id')
   organizer = '';
   caption = '';
-  targetFunding: number = 0;
-  currentFunding: number = 0;
+  targetFunding: number | null = null;
+  currentFunding: number | null = null;
   city = '';
   active: boolean = false;
   categoryID: number = 0;
@@ -117,8 +117,8 @@ export class UpdateFundraiserComponent implements OnInit {
   resetForm(): void {
     this.organizer = '';
     this.caption = '';
-    this.targetFunding = 0;
-    this.currentFunding = 0;
+    this.targetFunding = null;
+    this.currentFunding = null;
     this.city = '';
     this.active = false;
     this.categoryID = 0;
